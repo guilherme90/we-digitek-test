@@ -7,7 +7,7 @@
 - OpenAPI Doc
 - Docker
 
-**OBS**: Endereço URL da API é `http://localhost/3000/api`
+**OBS**: A URL da API é `http://localhost:3000/api`
 
 ---
 
@@ -44,6 +44,8 @@ Elas são importantes, pois a rota raíz inicia o projeto com uma resposta `200`
 
 ### Documentação da API
 A documentação dos endpoints podem ser acessados em `http://localhost/3000/docs`
+
+---
 
 ### Executando os testes
 Crie um arquivo `.env.test` antes de executar os testes, e, se necessário, configure as variáveis de ambiente.
