@@ -8,5 +8,10 @@ export function randomMatch(start: number, value: number): number {
   const min = Math.ceil(start)
   const max = Math.floor(value)
 
-  return Math.floor(Math.random() * max + min)
+  const number = Math.floor(Math.random() * max + min)
+  if (number > 0) {
+    return number
+  }
+
+  return 1
 }

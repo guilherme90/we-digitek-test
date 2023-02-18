@@ -21,6 +21,10 @@ interface IMatchItem {
 @Injectable()
 export class MatchUsecase {
   private async translateRolls(players: Map<number, any>): Promise<Map<number, IMatchItem>> {
+    if (!players.size) {
+      throw new BadRequestException('Nenhum jogador encontrado')
+    }
+
     const result = new Map<number, IMatchItem>()
 
     for (const [_, player] of players) {
@@ -71,7 +75,7 @@ export class MatchUsecase {
       if (!checkPlayFormat(item.roll)) {
         throw new BadRequestException('Falha ao processar jogada', [
           {
-            message: `O jogador "${item.name}" fez sua jogada incorreta.`
+            message: `O jogador "${item.name}" fez uma jogada incorreta.`
           }
         ])
       }
