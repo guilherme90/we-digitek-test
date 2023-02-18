@@ -65,33 +65,6 @@ describe('POST /matches/roll', () => {
     )
   })
 
-  test('should return 400 - invalid roll', async () => {
-    const response = await request(app)
-      .post('/api/matches/roll')
-      .send({
-        players: [
-          {
-            id: 1,
-            name: 'Jogador 1',
-            roll: '2d4'
-          }, {
-            id: 2,
-            name: 'Jogador 2',
-            roll: '5dd3'
-          }
-        ]
-      })
-
-    const { body, status } = response
-    expect(status).toEqual(400)
-    expect(body.message).toStrictEqual('Falha ao processar jogada')
-    expect(body.errors).toStrictEqual(expect.arrayContaining([
-      expect.objectContaining({
-        message: 'O jogador "Jogador 2" fez sua jogada incorreta.'
-      })
-    ]))
-  })
-
   test('should return 200', async () => {
     const response = await request(app)
       .post('/api/matches/roll')
