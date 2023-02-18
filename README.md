@@ -1,12 +1,21 @@
 # WE:DIGITEK API
 
-### Tecnologias
+## Tecnologias
 - NodeJS & TypeScript
 - Express
 - Jest
 - OpenAPI Doc
+- Docker
 
-### Setup
+### Setup 
+
+#### Docker
+Se caso preferir, execute o comando do Docker para subir a aplicação
+```shell
+$ docker-compose up -d
+```
+
+### Sem o Docker
 
 #### Configuração inicial
 Fazer uma cópia do arquivo `.env.example` para `.env` e verificar se as variáveis estão configuradas corretamente para o ambiente local
