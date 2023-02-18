@@ -1,0 +1,116 @@
+openapi: 3.0.2
+info:
+  title: WeDigitek API
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/api'
+    description: Localhost
+
+paths:
+  /matches/roll:
+    summary: Endpoint responsável por fazer jogadas em grupo
+    post:
+      tags:
+        - Matches
+      operationId: Matches
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatchesModel'
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMatches200'
+
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse400'
+
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse422'
+
+components:
+  schemas:
+    MatchesModel:
+      type: object
+      properties:
+        players:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                example: 1
+                required: true
+              name:
+                type: string
+                example: Player 1
+                required: true
+              roll:
+                type: string
+                example: 2d6
+                required: true
+
+    ResponseMatches200:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            example: 1
+          name:
+            type: string
+            example: Player 1
+          matches:
+            type: array
+            items:
+              type: number
+              example: [1, 2]
+              minItems: 1
+              maxItems: 3
+          total:
+            type: number
+            example: 2
+
+    ErrorsResponse400:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+
+    ErrorsResponse422:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                required: true
+              message:
+                type: string
+                required: true
