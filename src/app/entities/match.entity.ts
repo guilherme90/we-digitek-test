@@ -1,4 +1,4 @@
-export interface MatchInput {
+export interface IMatchInput {
   players: Array<{
     id: number
     name: string
@@ -6,7 +6,7 @@ export interface MatchInput {
   }>
 }
 
-export interface MatchOutput {
+export interface IMatchOutput {
   id: number
   name: string
   matches: number[]

@@ -1,9 +1,9 @@
 import { Injectable } from '@decorators/di'
-import { MatchInput, MatchOutput } from '@/app/entities/match.entity'
+import { IMatchInput, IMatchOutput } from '@/app/entities/match.entity'
 import { checkPlayFormat, randomMatch } from '@/utils'
 import { BadRequestException } from '@/config/interfaces/exceptions'
 
-interface ITranslateRoll {
+interface IMatchItem {
   id: number
   name: string
   roll: string
@@ -20,8 +20,8 @@ interface ITranslateRoll {
 
 @Injectable()
 export class MatchUsecase {
-  private async translateRolls(players: Map<number, any>): Promise<Map<number, ITranslateRoll>> {
-    const result = new Map<number, ITranslateRoll>()
+  private async translateRolls(players: Map<number, any>): Promise<Map<number, IMatchItem>> {
+    const result = new Map<number, IMatchItem>()
 
     for (const [_, player] of players) {
       player.rollItems.reduce((_, item, index) => {
@@ -38,14 +38,14 @@ export class MatchUsecase {
             }
           })
         }
-      }, {} as Map<number, ITranslateRoll>)
+      }, {} as Map<number, IMatchItem>)
     }
 
     return result
   }
 
-  private async randomMatches(players: Map<number, ITranslateRoll>): Promise<any> {
-    const result: MatchOutput[] = []
+  private async randomMatches(players: Map<number, IMatchItem>): Promise<any> {
+    const result: IMatchOutput[] = []
 
     for (const [_, player] of players) {
       const { quantity, limit } = player.match
@@ -64,8 +64,8 @@ export class MatchUsecase {
     return result
   }
 
-  async getResultMatch(data: MatchInput): Promise<MatchOutput[]> {
-    const players = new Map<number, ITranslateRoll>()
+  async getResultMatch(data: IMatchInput): Promise<IMatchOutput[]> {
+    const players = new Map<number, IMatchItem>()
 
     data.players.reduce((acc, item) => {
       if (!checkPlayFormat(item.roll)) {
@@ -83,7 +83,7 @@ export class MatchUsecase {
         rollItems: item.roll.split('').map((roll) => (roll === 'd' ? null : roll))
       })
       return acc
-    }, {} as Map<number, ITranslateRoll>)
+    }, {} as Map<number, IMatchItem>)
 
     const result = await this.translateRolls(players)
     return await this.randomMatches(result)
