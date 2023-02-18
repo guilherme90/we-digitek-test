@@ -7,9 +7,7 @@
 - OpenAPI Doc
 - Docker
 
-### Setup 
-
-#### Docker
+### Docker
 Se caso preferir, execute o comando do Docker para subir a aplicação
 ```shell
 $ docker-compose up -d
@@ -44,7 +42,7 @@ $ npm run test:unit
 $ npm run test:e2e
 ```
 
-### Todos os testes
+#### Todos os testes
 ```shell
 $ npm run test
 ```
