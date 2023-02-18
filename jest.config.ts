@@ -7,22 +7,14 @@ export default {
   verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testTimeout: 30000,
-  testMatch: ['**/tests/**/?(*)+(spec|test).[tj]s?(x)', '!**/dist/**', '!**/.dist/**'],
-  globalSetup: './tests/global-setup.ts',
-  globalTeardown: './tests/global-teardown.ts',
+  testMatch: ['**/tests/**/?(*)+(test).ts'],
   setupFiles: ['./tests/env-setup.ts'],
-  // setupFilesAfterEnv: ['./tests/global-setup.ts'],
   moduleNameMapper: {
     '@/(.*)$': '<rootDir>/src/$1'
   },
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
-    'src/**/*.{js,ts}',
-    '!**/node_modules/**',
-    '!**/vendor/**',
-    '!**/dist/**',
-    '!**/.dist/**'
+    'src/**/*.{ts}'
   ],
   coverageThreshold: {
     global: {
