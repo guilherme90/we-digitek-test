@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  wedigitek-api:
+    container_name: wedigitek_container
+    image: node:19
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "3000:3000"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    networks:
+      - wedigitek-network
+    volumes:
+      - "./:/app"
+
+networks:
+  wedigitek-network:
+    driver: bridge
